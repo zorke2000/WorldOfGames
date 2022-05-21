@@ -7,7 +7,7 @@
 import time
 from os import path
 import random
-import game_helper
+import Util
 
 Game_name = path.basename(__file__)  # get THIS file's name. Help to differentiate in game's logs.
 
@@ -18,7 +18,7 @@ Game_name = path.basename(__file__)  # get THIS file's name. Help to differentia
 #   Return: True/False if the user won/lost.
 # ==========================
 def play(difficulty_level):
-    game_helper.my_log("(%s) difficulty level: %s" % (Game_name, difficulty_level))
+    Util.my_log("(%s) difficulty level: %s" % (Game_name, difficulty_level))
     print("\n*** Welcome to %s! (difficulty level: %s) ***" % (Game_name.strip(".py"), difficulty_level))
 
     # according to difficulty level, find the corresponding range boundaries
@@ -56,7 +56,7 @@ def generate_sequence(range_max):
     generated_list = []
     for i in range(range_max):
         generated_list.append(random.randint(1, 100))
-    game_helper.my_log("(%s) Generated list of numbers: %s" % (Game_name, generated_list))
+    Util.my_log("(%s) Generated list of numbers: %s" % (Game_name, generated_list))
     return generated_list
 
 
@@ -85,7 +85,7 @@ def display_hide_list(generated_list, difficulty_level):
 def get_list_from_user():
     players_list = (input("What was my list? > ")).split()
     players_list = [int(s) for s in players_list if s != " "]
-    game_helper.my_log("Player's list: %s" % players_list)
+    Util.my_log("Player's list: %s" % players_list)
     return players_list
 
 

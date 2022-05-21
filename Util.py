@@ -2,8 +2,10 @@
 # Course: DevOps 1803 (2022)
 # Name: Zohar Skupinsky
 # Project: WorldOfGames (WoG)
-# File: game_helper.py
-# Purpose: useful multi-purpose functions
+# File: Utils.py
+# Purpose:
+#   A general purpose python file.
+#   This file will contain general information and operations we need for the game
 # ==========================
 
 from os.path import join
@@ -13,13 +15,16 @@ from time import strftime
 time_format = "%Y%m%d_%H%M%S"
 timestamp = strftime(time_format)
 
-path_to_file = "c:\\temp\\wog"
-file_name = "wog_%s.log" % timestamp
-log_file = join(path_to_file, file_name)
+PATH_TO_LOG_FILE = "c:\\temp\\wog"
+LOG_FILE_NAME = "wog_%s.log" % timestamp
+LOG_FILE = join(PATH_TO_LOG_FILE, LOG_FILE_NAME)
+
+SCORES_FILE_NAME = 'wog_scores.txt'
+BAD_RETURN_CODE = -999
 
 
 def write_to_file(data):
-    with open(log_file, "a") as file:
+    with open(LOG_FILE, "a") as file:
         file.write(data)
 
 
@@ -49,3 +54,8 @@ def my_log(msg, msg_type="log", stdout="file", action="cont"):
             write_to_file("\n[err][%s] Wrong arg for my_log action!" % timestamp)
         else:
             print("\n[err][%s] Wrong arg for my_log action!" % timestamp)
+
+
+def screen_cleaner():
+    # clear the console
+    pass

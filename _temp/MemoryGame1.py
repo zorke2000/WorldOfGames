@@ -8,7 +8,7 @@
 from os import path
 import keyboard
 import random
-import game_helper
+import Util
 
 Game_name = path.basename(__file__)  # get THIS file's name. Help to differentiate in game's logs.
 

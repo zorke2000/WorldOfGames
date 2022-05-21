@@ -15,7 +15,7 @@
 # ==========================
 
 from os import path
-import game_helper
+import Util
 import random
 
 Game_name = path.basename(__file__)  # get THIS file's name. Help to differentiate in game's logs.
@@ -57,7 +57,7 @@ def generate_number(difficulty_level):
     max_range = guessing_range(difficulty_level)[1]
 
     secret_number = random.randint(range_min, max_range)
-    game_helper.my_log("(%s) secret number= %d | min=%d, max=%d" % (Game_name, secret_number, range_min, max_range))
+    Util.my_log("(%s) secret number= %d | min=%d, max=%d" % (Game_name, secret_number, range_min, max_range))
     return secret_number
 
 
