@@ -6,7 +6,6 @@
 # ==========================
 import time
 from os import path
-import keyboard
 import random
 import game_helper
 

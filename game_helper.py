@@ -13,13 +13,13 @@ from time import strftime
 time_format = "%Y%m%d_%H%M%S"
 timestamp = strftime(time_format)
 
-path_to_file = "c:\\Develop\\MyProjects\\_logs"
-file_name = "debug_%s.log" % timestamp
+path_to_file = "c:\\temp\\wog"
+file_name = "wog_%s.log" % timestamp
 log_file = join(path_to_file, file_name)
 
 
 def write_to_file(data):
-    with open(file_name, "a") as file:
+    with open(log_file, "a") as file:
         file.write(data)
 
 
@@ -28,7 +28,7 @@ def my_log(msg, msg_type="log", stdout="file", action="cont"):
     #   "log" - general logs (default)
     #   "info" - for benchmarks
     #   "err" - for error alerts
-    #   "my_log" - for my_log purposes
+    #   "debug" - for debug purposes
     time_format_d = "%Y-%m-%d %H:%M:%S"
     timestamp_d = strftime(time_format_d)
     msg_type = msg_type.upper()
