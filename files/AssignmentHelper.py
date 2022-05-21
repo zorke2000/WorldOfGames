@@ -16,7 +16,7 @@ def debug(msg, msg_type="log", action="cont"):
     #   "log" - general logs (default)
     #   "info" - for benchmarks
     #   "err" - for error alerts
-    #   "debug" - for debug purposes
+    #   "my_log" - for my_log purposes
     msg_type = msg_type.upper()
 
     print("[%s][%s] %s" % (msg_type, timestamp, msg))
@@ -28,7 +28,7 @@ def debug(msg, msg_type="log", action="cont"):
     elif action == "stop":
         quit(0)
     else:  # wrong input for arg 'action'! report error & continue to run
-        debug("Wrong arg for debug action!", msg_type="err")
+        debug("Wrong arg for my_log action!", msg_type="err")
 
 
 def print_header(assignment):
@@ -63,7 +63,7 @@ def press_to_continue():
 
 
 def get_user_input(message, fix_selection="", term_to_quit="q"):
-    # fix_selection: used for debug & coding-in-progress.
+    # fix_selection: used for my_log & coding-in-progress.
     # if empty - get input from gui
     # if not empty, skip input from user & use the hard-coded selection
     if fix_selection != "":

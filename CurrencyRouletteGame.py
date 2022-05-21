@@ -28,12 +28,12 @@ currency2 = "ILS"
 #   Return: True/False if the user won/lost
 # ==========================
 def play(difficulty_level):
-    game_helper.debug("(%s) difficulty level: %s" % (Game_name, difficulty_level))
+    game_helper.my_log("(%s) difficulty level: %s" % (Game_name, difficulty_level))
     print("\n*** Welcome to %s! (difficulty level: %s) ***" % (Game_name.strip(".py"), difficulty_level))
 
     # generate a random amount in USD to be converted into NIS
     amount_currency1 = random.randint(range_min, range_max)
-    game_helper.debug("Generated amount (USD): %s" % amount_currency1)
+    game_helper.my_log("Generated amount (USD): %s" % amount_currency1)
 
     # check forex API for current currency exchange rate from currency1 to currency2
     conversion_rate = currency_exchange()
@@ -58,7 +58,7 @@ def currency_exchange():
     api_endpoint_pair = f'https://v6.exchangerate-api.com/v6/{api_key}/pair/{currency1}/{currency2}'
     api_response = requests.get(api_endpoint_pair)
     conversion_rate = api_response.json()["conversion_rate"]
-    game_helper.debug("%s-to-%s current conversion rate is: %s" % (currency1, currency2, conversion_rate))
+    game_helper.my_log("%s-to-%s current conversion rate is: %s" % (currency1, currency2, conversion_rate))
     print("%s-to-%s rate is: ***\n(not going to tell you! this is what's this game is all about..)"
           % (currency1, currency2))
 
@@ -66,7 +66,7 @@ def currency_exchange():
 
     # TODO: Check to see if USD is a valid currency code
     # print("Something wrong with the currency codes.")
-    # game_helper.debug("currency codes error | code1=%s code2=%s" % (currency1, currency2), msg_type="err")
+    # game_helper.my_log("currency codes error | code1=%s code2=%s" % (currency1, currency2), msg_type="err")
 
 
 # ==========================
@@ -90,8 +90,8 @@ def get_money_interval(amount_currency2, difficulty_level):
     accuracy_shoulders_low = amount_currency2 - (5 - difficulty_level)
     accuracy_shoulders_high = amount_currency2 + (5 - difficulty_level)
     money_interval = range(accuracy_shoulders_low, accuracy_shoulders_high+1)
-    game_helper.debug("amount currency2= %s , money interval: %s-%s"
-                      % (amount_currency2, accuracy_shoulders_low, accuracy_shoulders_high))
+    game_helper.my_log("amount currency2= %s , money interval: %s-%s"
+                       % (amount_currency2, accuracy_shoulders_low, accuracy_shoulders_high))
     return money_interval
 
 
@@ -110,5 +110,5 @@ def check_result(players_guess, money_interval, ):
 
 def calc_currency2_amount(conversion_rate, amount_currency1):
     amount_currency2 = int(amount_currency1 * conversion_rate)
-    game_helper.debug("Calculated amount (%s): %s" % (currency2, amount_currency2))
+    game_helper.my_log("Calculated amount (%s): %s" % (currency2, amount_currency2))
     return amount_currency2
