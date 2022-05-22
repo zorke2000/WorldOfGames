@@ -28,9 +28,7 @@ currency2 = "ILS"
 #   Return: True/False if the user won/lost
 # ==========================
 def play(difficulty_level):
-    Util.my_log("(%s) difficulty level: %s" % (Game_name, difficulty_level))
-    print("\n*** Welcome to %s! (difficulty level: %s) ***" % (Game_name.strip(".py"), difficulty_level))
-
+    Util.welcome_to_game(Game_name, difficulty_level)
     # generate a random amount in USD to be converted into NIS
     amount_currency1 = random.randint(range_min, range_max)
     Util.my_log("Generated amount (USD): %s" % amount_currency1)

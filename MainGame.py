@@ -6,8 +6,10 @@
 # ==========================
 
 import Live
+from Util import screen_cleaner
 
 
+screen_cleaner()
 player = input("What's your name? ")
 Live.welcome(players_name=player)
 
@@ -26,3 +28,6 @@ while True:
         print("You win! Kudos! ")
     else:
         print("Well... you may succeed next time :)")
+
+    input("\nPress any key when ready...")
+    screen_cleaner()

@@ -57,8 +57,8 @@ def welcome(players_name):
 
     Util.my_log("Session started...")
     Util.my_log("User name: %s" % players_name, "info")
-    print("Hello %s and welcome to the World of Games (WoG)!"
-          "\nHere you can find many cool games to play." % players_name)
+    print("\nHello %s, welcome to the World of Games!"
+          "\nHere you'll find few cool games to play :)" % players_name)
 
 
 # ==========================

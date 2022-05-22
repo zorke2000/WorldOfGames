@@ -9,6 +9,7 @@
 # ==========================
 
 from os.path import join
+from os import system, name
 from time import strftime
 
 
@@ -56,6 +57,14 @@ def my_log(msg, msg_type="log", stdout="file", action="cont"):
             print("\n[err][%s] Wrong arg for my_log action!" % timestamp)
 
 
+# clear the console
 def screen_cleaner():
-    # clear the console
-    pass
+    system('cls' if name == 'nt' else 'clear')
+
+
+# print the welcome msg for each game module & report to log file
+def welcome_to_game(game_name, difficulty_level):
+    my_log("(%s) difficulty level: %s" % (game_name, difficulty_level))
+    screen_cleaner()
+    print("\n\n*** Welcome to %s! ***" % game_name.strip(".py"))
+    print("\ndifficulty level: %s" % difficulty_level)

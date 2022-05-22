@@ -18,9 +18,7 @@ Game_name = path.basename(__file__)  # get THIS file's name. Help to differentia
 #   Return: True/False if the user won/lost.
 # ==========================
 def play(difficulty_level):
-    Util.my_log("(%s) difficulty level: %s" % (Game_name, difficulty_level))
-    print("\n*** Welcome to %s! (difficulty level: %s) ***" % (Game_name.strip(".py"), difficulty_level))
-
+    Util.welcome_to_game(Game_name, difficulty_level)
     # according to difficulty level, find the corresponding range boundaries
     range_min, range_max = guessing_range(difficulty_level)
     secret_number = generate_number(range_min, range_max)
