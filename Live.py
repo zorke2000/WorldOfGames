@@ -109,6 +109,6 @@ def load_game():
         player_win = CurrencyRouletteGame.play(difficulty_level)
     else:
         print("Something went wrong! Got unexpected game number from the input...")
-        quit(1)
+        quit(Util.BAD_RETURN_CODE)
 
     return player_win

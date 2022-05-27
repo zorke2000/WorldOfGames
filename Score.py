@@ -13,6 +13,7 @@
 #   point saved in a file.
 # ==========================
 
+import Util
 
 # ==========================
 # Function: add_score

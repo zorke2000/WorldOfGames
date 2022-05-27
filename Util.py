@@ -22,7 +22,7 @@ LOG_FILE = join(PATH_TO_FILE, LOG_FILE_NAME)
 
 SCORES_FILE_NAME = 'wog_scores.txt'
 SCORES_FILE = join(PATH_TO_FILE, SCORES_FILE_NAME)
-BAD_RETURN_CODE = -999
+BAD_RETURN_CODE = -1
 
 
 def write_to_file(data):
