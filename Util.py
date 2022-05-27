@@ -16,11 +16,12 @@ from time import strftime
 time_format = "%Y%m%d_%H%M%S"
 timestamp = strftime(time_format)
 
-PATH_TO_LOG_FILE = "c:\\temp\\wog"
+PATH_TO_FILE = "c:\\temp\\wog"
 LOG_FILE_NAME = "wog_%s.log" % timestamp
-LOG_FILE = join(PATH_TO_LOG_FILE, LOG_FILE_NAME)
+LOG_FILE = join(PATH_TO_FILE, LOG_FILE_NAME)
 
 SCORES_FILE_NAME = 'wog_scores.txt'
+SCORES_FILE = join(PATH_TO_FILE, SCORES_FILE_NAME)
 BAD_RETURN_CODE = -999
 
 

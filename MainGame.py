@@ -25,9 +25,9 @@ while True:
         quit(0)
     elif player_win:
         wins += 1
-        print("You win! Kudos! ")
+        print("\nGreat! You win!")
     else:
-        print("Well... you may succeed next time :)")
+        print("\nNo luck this time...")
 
     input("\nPress any key when ready...")
     screen_cleaner()
