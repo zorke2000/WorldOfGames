@@ -8,21 +8,47 @@
 #   The scores file at this point will consist of only a number.
 #   That number is the accumulation of the winnings of the user.
 #   Amount of points for winning a game is as follows:
-#       POINTS_OF_WINNING = (DIFFICULTY X 3) + 5
+#       POINTS_OF_WINNING = DIFFICULTY X 3
 #   Each time the user is winning a game, the points he won will be added to his current amount of
 #   point saved in a file.
 # ==========================
 
-import Util
+from Util import my_log, SCORES_FILE
+from os import path
+
 
 # ==========================
 # Function: add_score
 #   Purpose:
-#   Return:
+#   Return: none
 #   Logic:
 #       The function’s input is a variable named difficulty.
-#       The function will try to read the current score in the scores file,
-#       if it fails it will create a new one and will use it to save the current score.
+#       The function will read the current score in the scores file,
+#       and will use it to save the current score.
 # ==========================
 def add_score(difficulty_level):
-    pass
+    # score before the latest win
+    score = read_score_file()
+    my_log("Current score: %s" % score)
+    # calc new score after latest win
+    score += difficulty_level*3
+    my_log("New score: %s" % score)
+    write_to_score_file(score)
+
+
+def write_to_score_file(score):
+    with open(SCORES_FILE, "w") as file:
+        file.write(str(score))
+
+
+def read_score_file():
+    with open(SCORES_FILE, "r") as file:
+        return int(file.readline())
+
+
+def reset_score_file():
+    if not path.exists(SCORES_FILE):
+        my_log("Score file not exists yet... Create it & init with 0.")
+        write_to_score_file(0)
+    else:
+        write_to_score_file(0)

@@ -75,8 +75,8 @@ def display_hide_list(generated_list, difficulty_level):
     print(" " * len(msg), end="\r")  # clear line from previous output
 
     msg = ' list in %i...'
-    # count from 5 to 0 (in sec)
-    for i in range(5, 0, -1):
+    # count from 3 to 0 (in sec)
+    for i in range(3, 0, -1):
         print(msg % i, end="\r")
         time.sleep(1)
     print(" "*len(msg), end="\r")  # clear line from previous output

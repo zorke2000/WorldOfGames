@@ -16,6 +16,7 @@ from time import strftime
 time_format = "%Y%m%d_%H%M%S"
 timestamp = strftime(time_format)
 
+SESSION_ENDED = True
 PATH_TO_FILE = "c:\\temp\\wog"
 LOG_FILE_NAME = "wog_%s.log" % timestamp
 LOG_FILE = join(PATH_TO_FILE, LOG_FILE_NAME)
@@ -25,9 +26,9 @@ SCORES_FILE = join(PATH_TO_FILE, SCORES_FILE_NAME)
 BAD_RETURN_CODE = -1
 
 
-def write_to_file(data):
+def write_to_log_file(info):
     with open(LOG_FILE, "a") as file:
-        file.write(data)
+        file.write(info)
 
 
 def my_log(msg, msg_type="log", stdout="file", action="cont"):
@@ -40,7 +41,7 @@ def my_log(msg, msg_type="log", stdout="file", action="cont"):
     timestamp_d = strftime(time_format_d)
     msg_type = msg_type.upper()
     if stdout == "file":
-        write_to_file(("\n[%s][%s] %s" % (msg_type, timestamp_d, msg)))
+        write_to_log_file(("\n[%s][%s] %s" % (msg_type, timestamp_d, msg)))
     else:
         print(("[%s][%s] %s" % (msg_type, timestamp_d, msg)))
 
@@ -53,9 +54,9 @@ def my_log(msg, msg_type="log", stdout="file", action="cont"):
         quit(0)
     else:  # wrong input for arg 'action'! report error & continue to run
         if stdout == "file":
-            write_to_file("\n[err][%s] Wrong arg for my_log action!" % timestamp)
+            write_to_log_file("\n[err][%s] Wrong arg for my_log action! (code: %s)" % (timestamp, BAD_RETURN_CODE))
         else:
-            print("\n[err][%s] Wrong arg for my_log action!" % timestamp)
+            print("\n[err][%s] Wrong arg for my_log action! (code: %s)" % (timestamp, BAD_RETURN_CODE))
 
 
 # clear the console
@@ -68,4 +69,4 @@ def welcome_to_game(game_name, difficulty_level):
     my_log("(%s) difficulty level: %s" % (game_name, difficulty_level))
     screen_cleaner()
     print("\n\n*** Welcome to %s! ***" % game_name.strip(".py"))
-    print("\ndifficulty level: %s" % difficulty_level)
+    print("\nDifficulty level: %s" % difficulty_level)
