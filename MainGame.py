@@ -19,7 +19,7 @@ while True:
     end_session = Live.load_game()
     if end_session == SESSION_ENDED:
         quit(0)
-    print("\nTo see your score, go to 127.0.0.1:5000/wog_score\n")
+    print("\nTo see your score, go to 127.0.0.1:30000/wog_score\n")
     MainScores.score_server()
     input("\nPress any key when ready...")
     screen_cleaner()
