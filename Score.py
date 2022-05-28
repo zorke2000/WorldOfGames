@@ -29,10 +29,10 @@ from os import path
 def add_score(difficulty_level):
     # score before the latest win
     score = read_score_file()
-    my_log("Current score: %s" % score)
+    my_log("Current score: %s" % score, "info")
     # calc new score after latest win
     score += difficulty_level*3
-    my_log("New score: %s" % score)
+    my_log("New score: %s" % score, "info")
     write_to_score_file(score)
 
 
@@ -48,7 +48,7 @@ def read_score_file():
 
 def reset_score_file():
     if not path.exists(SCORES_FILE):
-        my_log("Score file not exists yet... Create it & init with 0.")
-        write_to_score_file(0)
+        my_log("Score file not exists yet... Create & init it with score 0.", "info")
     else:
-        write_to_score_file(0)
+        my_log("Score file already exists. Reset it to score 0.", "info")
+    write_to_score_file(0)

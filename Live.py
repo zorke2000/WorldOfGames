@@ -117,9 +117,9 @@ def load_game():
         quit(BAD_RETURN_CODE)
 
     if player_win:
-        my_log("Player won!")
+        my_log("Player won!", "info")
         print("\nGreat! You win!")
         Score.add_score(difficulty_level)
     else:
-        my_log("Player lost!")
+        my_log("Player lost!", "info")
         print("\nNo luck this time...")
