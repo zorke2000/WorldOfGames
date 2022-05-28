@@ -6,7 +6,9 @@
 # ==========================
 
 # import os
-import game_helper
+import Util
+from Util import my_log, BAD_RETURN_CODE
+import Score
 import CurrencyRouletteGame
 import GuessGame
 import MemoryGame
@@ -55,10 +57,10 @@ def welcome(players_name):
     if type(players_name) != str:
         players_name = str(players_name)
 
-    game_helper.debug("Session started...")
-    game_helper.debug("User name: %s" % players_name, "info")
-    print("Hello %s and welcome to the World of Games (WoG)!"
-          "\nHere you can find many cool games to play." % players_name)
+    my_log("Session started...")
+    my_log("User name: %s" % players_name, "info")
+    print("\nHello %s, welcome to the World of Games!"
+          "\nHere you'll find few cool games to play :)" % players_name)
 
 
 # ==========================
@@ -78,13 +80,13 @@ def main_menu():
     if players_input == 0:
         return 0, 0
 
-    game_helper.debug("Game selected: %s" % games_list[players_input])
+    my_log("Game selected: %s" % games_list[players_input])
     game_id = players_input
 
     # Player should choose game's level of difficulty
     print("\nNow, let's choose DIFFICULTY level (1 is beginner, 5 is master):")
     players_input = get_players_input(list(difficulty_levels.keys()))
-    game_helper.debug("Difficulty level selected: %s" % difficulty_levels[players_input])
+    my_log("Difficulty level selected: %s" % difficulty_levels[players_input])
     difficulty_level = players_input
 
     return game_id, difficulty_level
@@ -98,9 +100,12 @@ def main_menu():
 def load_game():
     # display the main menu of the games
     game_id, difficulty_level = main_menu()
+    player_win = False
 
     if game_id == 0:
-        player_win = -1
+        my_log("Player ended session. (code: 0)")
+        print("\nThank you & goodbye!")
+        return Util.SESSION_ENDED
     elif game_id == 1:
         player_win = MemoryGame.play(difficulty_level)
     elif game_id == 2:
@@ -109,6 +114,12 @@ def load_game():
         player_win = CurrencyRouletteGame.play(difficulty_level)
     else:
         print("Something went wrong! Got unexpected game number from the input...")
-        quit(1)
+        quit(BAD_RETURN_CODE)
 
-    return player_win
+    if player_win:
+        my_log("Player won!", "info")
+        print("\nGreat! You win!")
+        Score.add_score(difficulty_level)
+    else:
+        my_log("Player lost!", "info")
+        print("\nNo luck this time...")

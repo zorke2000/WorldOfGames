@@ -6,9 +6,9 @@
 # ==========================
 import time
 from os import path
-import keyboard
 import random
-import game_helper
+import Util
+import sys
 
 Game_name = path.basename(__file__)  # get THIS file's name. Help to differentiate in game's logs.
 
@@ -19,9 +19,7 @@ Game_name = path.basename(__file__)  # get THIS file's name. Help to differentia
 #   Return: True/False if the user won/lost.
 # ==========================
 def play(difficulty_level):
-    game_helper.debug("(%s) difficulty level: %s" % (Game_name, difficulty_level))
-    print("\n*** Welcome to %s! (difficulty level: %s) ***" % (Game_name.strip(".py"), difficulty_level))
-
+    Util.welcome_to_game(Game_name, difficulty_level)
     # according to difficulty level, find the corresponding range boundaries
     range_min, range_max = guessing_range(difficulty_level)
     generated_list = generate_sequence(range_max)
@@ -57,7 +55,7 @@ def generate_sequence(range_max):
     generated_list = []
     for i in range(range_max):
         generated_list.append(random.randint(1, 100))
-    game_helper.debug("(%s) Generated list of numbers: %s" % (Game_name, generated_list))
+    Util.my_log("(%s) Generated list of numbers: %s" % (Game_name, generated_list))
     return generated_list
 
 
@@ -69,12 +67,25 @@ def generate_sequence(range_max):
 def display_hide_list(generated_list, difficulty_level):
     total_numbers = len(generated_list)
     total_chars = len(str(generated_list))
-    print("This is my list. Remember it!\nYou'll have %.1f seconds for this..." % (0.7*difficulty_level))
-    input("Press any key when ready...")
-    print("%s" % generated_list, end="")
-    time.sleep(0.7 * difficulty_level)
+    print("\nI'll show you %s numbers.\nYou'll have %.1f seconds to memorize it."
+          % (difficulty_level, 0.7*difficulty_level))
+    msg = "\nPress any key when ready..."
+    input(msg)
+    sys.stdout.write("\033[F")  # Cursor up one line (to overwrite the "press any key")
+    print(" " * len(msg), end="\r")  # clear line from previous output
+
+    msg = ' list in %i...'
+    # count from 3 to 0 (in sec)
+    for i in range(3, 0, -1):
+        print(msg % i, end="\r")
+        time.sleep(1)
+    print(" "*len(msg), end="\r")  # clear line from previous output
+
+    print(" %s" % generated_list, end="\r")
+    time.sleep(0.7*difficulty_level)
     # deletes the generated list & prints ? instead (for hiding effect)
-    print("\r" * total_chars, "? " * total_numbers)
+    print(" "*(total_chars+1), end="\r")
+    print(" ? "*total_numbers)
 
 
 # ==========================
@@ -86,7 +97,7 @@ def display_hide_list(generated_list, difficulty_level):
 def get_list_from_user():
     players_list = (input("What was my list? > ")).split()
     players_list = [int(s) for s in players_list if s != " "]
-    game_helper.debug("Player's list: %s" % players_list)
+    Util.my_log("Player's list: %s" % players_list)
     return players_list
 
 

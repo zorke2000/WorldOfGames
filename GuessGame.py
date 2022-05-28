@@ -6,7 +6,7 @@
 # ==========================
 
 from os import path
-import game_helper
+import Util
 import random
 
 Game_name = path.basename(__file__)  # get THIS file's name. Help to differentiate in game's logs.
@@ -18,9 +18,7 @@ Game_name = path.basename(__file__)  # get THIS file's name. Help to differentia
 #   Return: True/False if the user won/lost.
 # ==========================
 def play(difficulty_level):
-    game_helper.debug("(%s) difficulty level: %s" % (Game_name, difficulty_level))
-    print("\n*** Welcome to %s! (difficulty level: %s) ***" % (Game_name.strip(".py"), difficulty_level))
-
+    Util.welcome_to_game(Game_name, difficulty_level)
     # according to difficulty level, find the corresponding range boundaries
     range_min, range_max = guessing_range(difficulty_level)
     secret_number = generate_number(range_min, range_max)
@@ -52,7 +50,7 @@ def guessing_range(difficulty_level):
 # ==========================
 def generate_number(range_min, range_max):
     secret_number = random.randint(range_min, range_max)
-    game_helper.debug("(%s) secret number= %d | min=%d, max=%d" % (Game_name, secret_number, range_min, range_max))
+    Util.my_log("(%s) secret number= %d | min=%d, max=%d" % (Game_name, secret_number, range_min, range_max))
     return secret_number
 
 
