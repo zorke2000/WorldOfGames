@@ -7,10 +7,9 @@
 #   A general purpose python file.
 #   This file will contain general information and operations we need for the game
 # ==========================
-import os
+
 from os import system, name, path, mkdir
 from time import strftime
-
 
 time_format = "%Y%m%d_%H%M%S"
 timestamp = strftime(time_format)
@@ -25,16 +24,23 @@ SCORES_FILE_NAME = 'wog_scores.txt'
 SCORES_FILE = path.join(FILES_DIR, SCORES_FILE_NAME)
 BAD_RETURN_CODE = -1
 
+text_attr = {
+    'bold': '\033[1m',
+    'red': '\033[91m',
+    'blue': '\033[94m',
+    'end': '\033[0m'
+}
+
 
 def init_folders():
     try:
-        os.mkdir(LOG_DIR)
+        mkdir(LOG_DIR)
     except OSError:
         pass
         # print("Something went wrong with creating the '%s' folder or it's already exist.." % LOG_DIR)
 
     try:
-        os.mkdir(FILES_DIR)
+        mkdir(FILES_DIR)
     except OSError:
         pass
         # print("Something went wrong with creating the '%s' folder or it's already exist.." % FILES_DIR)
@@ -82,5 +88,5 @@ def screen_cleaner():
 def welcome_to_game(game_name, difficulty_level):
     my_log("(%s) difficulty level: %s" % (game_name, difficulty_level))
     screen_cleaner()
-    print("\n\n*** Welcome to %s! ***" % game_name.strip(".py"))
-    print("\nDifficulty level: %s" % difficulty_level)
+    print("\n\n*** Welcome to %s%s%s! ***" % (text_attr['blue'], game_name.strip(".py"), text_attr['end']))
+    print("\nDifficulty level: %s%s%s" % (text_attr['red'], difficulty_level, text_attr['end']))

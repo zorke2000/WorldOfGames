@@ -5,14 +5,9 @@
 # File: MainGame.py
 # ==========================
 
-# import os
 import Util
-from Util import my_log, BAD_RETURN_CODE
 import Score
-import CurrencyRouletteGame
-import GuessGame
-import MemoryGame
-
+from Games import MemoryGame, GuessGame, CurrencyRouletteGame
 
 games_list = {
     0: "Quit",
@@ -57,10 +52,11 @@ def welcome(player_name):
     if type(player_name) != str:
         player_name = str(player_name)
 
-    my_log("Session started...")
-    my_log("User name: %s" % player_name, "info")
-    print("\nHello %s & welcome to the World of Games!"
-          "\nHere you'll find few cool games to play :)" % player_name)
+    Util.my_log("Session started...")
+    Util.my_log("User name: %s" % player_name, "info")
+    print("\nHello %s & welcome to the %sWorld of Games%s!"
+          "\nHere you'll find few cool games to play :)"
+          % (player_name, Util.text_attr['blue'], Util.text_attr['end']))
 
 
 # ==========================
@@ -71,22 +67,26 @@ def welcome(player_name):
 def main_menu():
     # Player should choose the game...
     msg = '\n\nPlease choose a game to play:' \
-          '\n 0. Quit' \
-          '\n 1. Memory Game - a sequence of numbers will appear for 1sec. You have to guess it back.' \
-          '\n 2. Guess Game - guess a number and see if you chose like the computer' \
-          '\n 3. Currency Roulette - try to guess a value of a random amount of USD in ILS'
+          '\n 0. %sQuit%s' \
+          '\n 1. %sMemory Game%s - a sequence of numbers will appear for 1sec. You have to guess it back.' \
+          '\n 2. %sGuess Game%s - guess a number and see if you chose like the computer' \
+          '\n 3. %sCurrency Roulette%s - try to guess a value of a random amount of USD in ILS' \
+          % (Util.text_attr["red"], Util.text_attr["end"],
+             Util.text_attr["blue"], Util.text_attr["end"],
+             Util.text_attr["blue"], Util.text_attr["end"],
+             Util.text_attr["blue"], Util.text_attr["end"])
     print(msg)
     players_input = get_players_input(list(games_list.keys()))
     if players_input == 0:
         return 0, 0
 
-    my_log("Game selected: %s" % games_list[players_input])
+    Util.my_log("Game selected: %s" % games_list[players_input])
     game_id = players_input
 
     # Player should choose game's level of difficulty
     print("\nNow, let's choose DIFFICULTY level (1 is beginner, 5 is master):")
     players_input = get_players_input(list(difficulty_levels.keys()))
-    my_log("Difficulty level selected: %s" % difficulty_levels[players_input])
+    Util.my_log("Difficulty level selected: %s" % difficulty_levels[players_input])
     difficulty_level = players_input
 
     return game_id, difficulty_level
@@ -103,7 +103,7 @@ def load_game(player_name):
     player_win = False
 
     if game_id == 0:
-        my_log("Player ended session. (code: 0)")
+        Util.my_log("Player ended session. (code: 0)")
         print("\nThank you %s for playing! Goodbye." % player_name)
         return Util.SESSION_ENDED
     elif game_id == 1:
@@ -114,12 +114,12 @@ def load_game(player_name):
         player_win = CurrencyRouletteGame.play(difficulty_level)
     else:
         print("Something went wrong! Got unexpected game number from the input...")
-        quit(BAD_RETURN_CODE)
+        quit(Util.BAD_RETURN_CODE)
 
     if player_win:
-        my_log("Player won!", "info")
+        Util.my_log("Player won!", "info")
         print("\nGreat %s! You win!" % player_name)
         Score.add_score(difficulty_level)
     else:
-        my_log("Player lost!", "info")
+        Util.my_log("Player lost!", "info")
         print("\nNo luck this time %s..." % player_name)

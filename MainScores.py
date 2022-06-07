@@ -8,10 +8,9 @@
 #   This is done by using python’s flask library/
 # ==========================
 
+import Util
 import Score
 from flask import Flask
-
-import Util
 
 app = Flask(__name__)
 

@@ -59,6 +59,10 @@ The error tolerance margins for player's guess is defined according to the **dif
 
 
 ## Versions change log
+**3.1.0**:
+- Added some changes handling the external files (logs & score)
+- Moved the game files to a Games folder 
+
 **3.0.0**:
 - 3rd version of the WOG project
 - Level 3:
