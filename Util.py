@@ -7,9 +7,8 @@
 #   A general purpose python file.
 #   This file will contain general information and operations we need for the game
 # ==========================
-
-from os.path import join
-from os import system, name
+import os
+from os import system, name, path, mkdir
 from time import strftime
 
 
@@ -17,13 +16,28 @@ time_format = "%Y%m%d_%H%M%S"
 timestamp = strftime(time_format)
 
 SESSION_ENDED = True
-PATH_TO_FILE = "c:\\temp\\wog"
+LOG_DIR = "logs"
 LOG_FILE_NAME = "wog_%s.log" % timestamp
-LOG_FILE = join(PATH_TO_FILE, LOG_FILE_NAME)
+LOG_FILE = path.join(LOG_DIR, LOG_FILE_NAME)
 
+FILES_DIR = "files"
 SCORES_FILE_NAME = 'wog_scores.txt'
-SCORES_FILE = join(PATH_TO_FILE, SCORES_FILE_NAME)
+SCORES_FILE = path.join(FILES_DIR, SCORES_FILE_NAME)
 BAD_RETURN_CODE = -1
+
+
+def init_folders():
+    try:
+        os.mkdir(LOG_DIR)
+    except OSError:
+        pass
+        # print("Something went wrong with creating the '%s' folder or it's already exist.." % LOG_DIR)
+
+    try:
+        os.mkdir(FILES_DIR)
+    except OSError:
+        pass
+        # print("Something went wrong with creating the '%s' folder or it's already exist.." % FILES_DIR)
 
 
 def write_to_log_file(info):

@@ -52,15 +52,15 @@ def get_players_input(input_list):
 #   Purpose: Display the Welcome message with player's name
 #   Return: None
 # ==========================
-def welcome(players_name):
+def welcome(player_name):
     # name must be of type string...
-    if type(players_name) != str:
-        players_name = str(players_name)
+    if type(player_name) != str:
+        player_name = str(player_name)
 
     my_log("Session started...")
-    my_log("User name: %s" % players_name, "info")
-    print("\nHello %s, welcome to the World of Games!"
-          "\nHere you'll find few cool games to play :)" % players_name)
+    my_log("User name: %s" % player_name, "info")
+    print("\nHello %s & welcome to the World of Games!"
+          "\nHere you'll find few cool games to play :)" % player_name)
 
 
 # ==========================
@@ -97,14 +97,14 @@ def main_menu():
 #   Purpose: Run the chosen game with the selected difficulty level.
 #   Return: True/False whether user win or not. -1 if players wants to quit
 # ==========================
-def load_game():
+def load_game(player_name):
     # display the main menu of the games
     game_id, difficulty_level = main_menu()
     player_win = False
 
     if game_id == 0:
         my_log("Player ended session. (code: 0)")
-        print("\nThank you & goodbye!")
+        print("\nThank you %s for playing! Goodbye." % player_name)
         return Util.SESSION_ENDED
     elif game_id == 1:
         player_win = MemoryGame.play(difficulty_level)
@@ -118,8 +118,8 @@ def load_game():
 
     if player_win:
         my_log("Player won!", "info")
-        print("\nGreat! You win!")
+        print("\nGreat %s! You win!" % player_name)
         Score.add_score(difficulty_level)
     else:
         my_log("Player lost!", "info")
-        print("\nNo luck this time...")
+        print("\nNo luck this time %s..." % player_name)

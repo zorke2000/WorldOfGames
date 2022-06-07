@@ -28,7 +28,7 @@ These log files are being saved to the **logs** folder (inside the project).
    - _python MainGame.py_
 ### How to play
 1. The **main menu** prompts to choose a game to play & select the difficulty level.
-2. Upon the end of each game, the program returns to the **main menu** & the player can check the current score on the browser (127.0.0.1:30000/wog_score).
+2. Upon the end of each game, the program returns to the **main menu** & the player can check the current score on the browser (127.0.0.1:30000).
 3. The player now can either play another game (different or same) or quit the session (by selecting **0**).
 
 

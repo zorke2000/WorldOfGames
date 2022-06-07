@@ -6,20 +6,21 @@
 # ==========================
 
 import Live
-from Util import screen_cleaner, SESSION_ENDED
-from Score import reset_score_file
+import Util
+import Score
 import MainScores
 
-screen_cleaner()
-reset_score_file()
-player = input("What's your name? ")
-Live.welcome(players_name=player)
+Util.screen_cleaner()
+Util.init_folders()
+Score.reset_score_file()
+player_name = input("What's your name? ")
+Live.welcome(player_name)
 
 while True:
-    end_session = Live.load_game()
-    if end_session == SESSION_ENDED:
+    end_session = Live.load_game(player_name)
+    if end_session == Util.SESSION_ENDED:
         quit(0)
-    print("\nTo see your score, go to 127.0.0.1:30000/wog_score\n")
+    print("\nTo see your score, go to 127.0.0.1:30000\n")
     MainScores.score_server()
     input("\nPress any key when ready...")
-    screen_cleaner()
+    Util.screen_cleaner()
